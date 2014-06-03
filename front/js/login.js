@@ -46,8 +46,8 @@ loginApp.controller('LoginCtrl', ['$scope', '$http', function($scope, $http) {
         $http({
             method: 'POST',
             url: url,
-            //data: combinedParams
-            data: xsrf
+            data: combinedParams
+            //data: xsrf
             //headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         });
     }

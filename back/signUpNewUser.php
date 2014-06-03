@@ -2,9 +2,12 @@
 	
 $format = 'json';	
 
+$data = file_get_contents("php://input");
+$postData = json_decode($data);
+
 file_put_contents(
 	"log1",
-	"_POST : \n".print_r($_POST,true)."\n",
+	"postData : \n".print_r($postData,true)."\n",
 	FILE_APPEND|LOCK_EX
 );
 
