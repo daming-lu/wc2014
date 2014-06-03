@@ -41,10 +41,13 @@ loginApp.controller('LoginCtrl', ['$scope', '$http', function($scope, $http) {
         */
         var combinedParams = angular.extend((params || {}), authParams);
 
+        var xsrf = $.param(combinedParams);
+
         $http({
             method: 'POST',
             url: url,
-            data: combinedParams
+            //data: combinedParams
+            data: xsrf
             //headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         });
     }
