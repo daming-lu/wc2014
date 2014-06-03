@@ -1,0 +1,13 @@
+.wc_bg_cover {
+    overflow-x: hidden;
+    background: url("http://i.imgur.com/3oS66nE.jpg") top center no-repeat fixed #47403a;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color:blue;
+}
+
+.pad_top {
+    margin-top:140px;
+}
