@@ -1,0 +1,27 @@
+postData : 
+Array
+(
+    [fullName] => 123
+    [email] => 1@2.com
+    [password] => haha
+    [zs] => zs
+)
+
+postData : 
+Array
+(
+    [fullName] => 123
+    [email] => 1@2.com
+    [password] => haha
+    [zs] => zs
+)
+
+postData : 
+Array
+(
+    [fullName] => 123
+    [email] => 1@21.com
+    [password] => 123
+    [zs] => zs
+)
+

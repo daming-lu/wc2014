@@ -1,0 +1,6 @@
+INSERT INTO users(user_name, password, 'user_email') VALUES ('123','haha', '1@2.com') : 
+INSERT INTO users(user_name, password, 'user_email') VALUES ('123','haha', '1@2.com')
+INSERT INTO users(user_name, password,user_email) VALUES ('123','haha', '1@2.com') : 
+INSERT INTO users(user_name, password,user_email) VALUES ('123','haha', '1@2.com')
+INSERT INTO users(user_name, password,user_email) VALUES ('123','123', '1@21.com') : 
+INSERT INTO users(user_name, password,user_email) VALUES ('123','123', '1@21.com')

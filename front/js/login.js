@@ -22,7 +22,8 @@ loginApp.controller('LoginCtrl', ['$scope', '$http', function($scope, $http) {
     $scope.password = "";
 
     $scope.signUpNewUser = function () {
-        var url = "http://peirongli.dreamhosters.com/worldcup/dev/back/signUpNewUser.php";
+        //var url = "http://peirongli.dreamhosters.com/worldcup/dev/back/signUpNewUser.php";
+        var url = urlPrefix + "wc2014/back/signUpNewUser.php";
         var params = {
             'fullName'  : $scope.fullName,
             'email'     : $scope.email,
