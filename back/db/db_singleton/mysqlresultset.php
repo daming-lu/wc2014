@@ -219,5 +219,11 @@ class MySqlResultSet implements Iterator
        if ($this->row === false) return false;
        else return true;
     }
+
+    // >> Daming
+    function getNumRows() {
+        return $this->num_rows;
+    }
+
 }
 ?>

@@ -46,7 +46,7 @@
                                     <label for="inputEmail3" class="col-sm-3 control-label">Email</label>
 
                                     <div class="col-sm-9">
-                                        <input class="form-control" id="inputEmail3" placeholder="Email" required="" type="email" />
+                                        <input class="form-control" id="inputEmail3" ng-model="email" placeholder="Email" required="" type="email" />
                                     </div>
                                 </div>
 
@@ -54,7 +54,7 @@
                                     <label for="inputPassword3" class="col-sm-3 control-label">Password</label>
 
                                     <div class="col-sm-9">
-                                        <input class="form-control" id="inputPassword3" placeholder="Password" required="" type="password" />
+                                        <input class="form-control" id="inputPassword3" ng-model="password" placeholder="Password" required="" type="password" />
                                     </div>
                                 </div>
 
@@ -68,7 +68,7 @@
 
                                 <div class="form-group last">
                                     <div class="col-sm-offset-3 col-sm-9">
-                                        <button type="submit" class="btn btn-success btn-sm">Sign in</button> <button type="reset" class="btn btn-default btn-sm">Reset</button>
+                                        <button type="submit" class="btn btn-success btn-sm" ng-click="loginUser()">Sign in</button> <button type="reset" class="btn btn-default btn-sm">Reset</button>
                                     </div>
                                 </div>
                             </form>

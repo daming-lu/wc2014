@@ -52,4 +52,46 @@ loginApp.controller('LoginCtrl', ['$scope', '$http', function($scope, $http) {
             //headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         });
     }
+
+    $scope.loginUser = function () {
+        //var url = "http://peirongli.dreamhosters.com/worldcup/dev/back/signUpNewUser.php";
+        var url = urlPrefix + "wc2014/back/loginUser.php";
+        var params = {
+            'email'     : $scope.email,
+            'password'  : $scope.password
+        };
+        var authParams = {
+            'zs': 'zs'
+        };
+        /*
+        $http.post(url, params).success(function(data) {
+            console.log("returned data == \n");
+            data = data['data'];
+            console.log(JSON.stringify(data));
+            //$scope.users = data;
+        });
+        */
+        var combinedParams = angular.extend((params || {}), authParams);
+
+        var xsrf = $.param(combinedParams);
+
+        $http({
+            method: 'POST',
+            url: url,
+            data: combinedParams
+            //data: xsrf
+            //headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).
+        success(function(data, status, headers, config) {
+          // this callback will be called asynchronously
+          // when the response is available
+            console.log("login success");
+        }).
+        error(function(data, status, headers, config) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+                console.log("login failed");
+        });
+    }
+
 }]);
