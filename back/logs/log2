@@ -1,5 +1,0 @@
-form_token == _SESSION['form_token']
-form_token == _SESSION['form_token']
-form_token != _SESSION['form_token']
- NOOOOOOOO!form_token != _SESSION['form_token']
- NOOOOOOOO!

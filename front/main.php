@@ -26,6 +26,8 @@ $testName = "testNamehaha";
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
         </script>
 
+        <script type="text/javascript" src="js/constants.js"></script>
+
         <!-- Import AngularJS library -->
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js">
         </script>
@@ -37,6 +39,7 @@ $testName = "testNamehaha";
 		<link href="css/styles.css" rel="stylesheet">
         <link href="css/login.css" rel="stylesheet" type="text/css" />
 
+        <link href="css/main.css" rel="stylesheet" type="text/css" />
 
         <script type="text/javascript" src="js/main.js"></script>
 
@@ -66,21 +69,59 @@ $testName = "testNamehaha";
         <div class="col-md-10" data-spy="scroll" data-target="#sidebar-nav">
           <div class="row">
              <!-- Left Column -->
-           	 <div class="col-md-6">
+           	 <div class="col-md-7">
                 <div class="panel panel-default">
-                  <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>Newest Items</h4></div>
+                  <div class="panel-heading"><a href="#" class="pull-right">View all</a> <h4>Current Ranking</h4></div>
                     <div class="panel-body">
-                      <div class="list-group">
-                        <a href="#" class="list-group-item active">Active item</a>
-                        <a href="#" class="list-group-item">Second item</a>
-                        <a href="#" class="list-group-item">Third item</a>
-                        <a href="#" class="list-group-item">Another item</a>
-                        <a href="#" class="list-group-item">Another item</a>
-                        <a href="#" class="list-group-item">Another item</a>
-                        <a href="#" class="list-group-item">Another item</a>
-                        <a href="#" class="list-group-item">Another item</a>
-                        <a href="#" class="list-group-item">Another item</a>
-                      </div>
+
+                        <table class="table table-bordered">
+                            <thead>
+                            <th>
+                                <td rowspan="2">User Name</td>
+                                <td>Passed Match</td>
+                                <td>Current Match</td>
+                                <td rowspan="2">Score</td>
+                            </th>
+                            </thead>
+                            <tbody ng-repeat="(user_id, matches) in conciseRanking">
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    {{user_id}}
+                                </td>
+                                <td>
+                                    {{matches.match_1}}
+                                </td>
+                                <td>
+                                    {{matches.match_2}}
+                                </td>
+                                <td>
+                                    0
+                                </td>
+                            </tr>
+                            </tbody>
+                            <!--
+                            <tr >
+                                <td>&nbsp;</td>
+                                <td>BRAZIL - CROATIA</td>
+                                <td>RUSSIA - SOUTH KOREA</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Daming Lu</td>
+                                <td class="table_error">2 : 0</td>
+                                <td class="success">3 : 1</td>
+                                <td>98</td>
+                            </tr>
+                            <tr >
+                                <td>2</td>
+                                <td>Chenyang Zhang</td>
+                                <td class="success">1 : 2</td>
+                                <td class="table_error">2 : 2</td>
+                                <td>98</td>
+                            </tr>
+                            -->
+                        </table>
                     </div><!--/panel-body-->
                 </div><!--/panel-->
              
@@ -114,7 +155,7 @@ $testName = "testNamehaha";
             </div><!--/col-->
 
             <!-- Right Column -->
-            <div class="col-md-6">
+            <div class="col-md-5">
                  <div class="well"> 
                      <form class="form">
                       <h4>Sign-up</h4>

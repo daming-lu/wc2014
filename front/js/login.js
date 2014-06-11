@@ -69,6 +69,7 @@ loginApp.controller('LoginCtrl', ['$scope', '$http',function($scope, $http, $loc
             'password'  : $scope.password,
             'token'     : $scope.token
         };
+
         var authParams = {
             'zs': 'zs'
         };
