@@ -18,7 +18,10 @@ $query = "DROP TABLE IF EXISTS matches";
 
 $db->query($query);
 
-$query = "CREATE TABLE matches(match_num INT(11) NOT NULL AUTO_INCREMENT, left_team varchar (50), right_team varchar (50), match_time DATETIME, PRIMARY KEY(match_num))";
+$query = "
+    CREATE TABLE matches(match_num INT(11) NOT NULL AUTO_INCREMENT,
+    left_team varchar (50), right_team varchar (50), match_time DATETIME, result varchar(10),PRIMARY KEY(match_num))";
+
 echo $query."\n";
 $db->query($query);
 
