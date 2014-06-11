@@ -46,6 +46,8 @@ catch (Exception $e) {
 }
 
 $query = "SELECT * FROM users WHERE user_email = '$user_email' AND password = '$user_password'";
+// to trigger return results that is more than 1, we can simply remove one 'where' so that
+// users with same password can be returned :)
 
 file_put_contents(
 	"./logs/log5",
@@ -92,6 +94,7 @@ if ($result->getNumRows()!=1) {
 
 
     $_SESSION['user_name'] = $row['user_name'];
+    $_SESSION['user_id'] = $row['user_id'];
     //header ("Location: ../front/main.php");
     //header ("Location: http://damingl-mbp15ret.zoosk.local/wc2014/front/main.php");
     header('HTTP/1.0' . ' ' . '200' . ' ' . 'OK');

@@ -1,0 +1,31 @@
+_SESSION : Array
+(
+    [form_token] => a938c678e63d2ae5cdab62dfebd8bcf9
+    [login] => 1
+    [user_name] => user_1
+)
+
+_SESSION : Array
+(
+    [form_token] => 4126d10d8b22eb066bd87d153306ff9b
+    [login] => 1
+    [user_name] => user_1
+    [user_id] => 1
+)
+
+_SESSION : Array
+(
+    [form_token] => 4126d10d8b22eb066bd87d153306ff9b
+    [login] => 
+    [user_name] => user_1
+    [user_id] => 1
+)
+
+_SESSION : Array
+(
+    [form_token] => 4126d10d8b22eb066bd87d153306ff9b
+    [login] => 
+    [user_name] => user_1
+    [user_id] => 1
+)
+

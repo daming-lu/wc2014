@@ -7,3 +7,126 @@ login works!!!
 login works!!!
 login works!!!
 login works!!!
+_SESSION : 
+[Array
+(
+    [form_token] => 1ca6a1eb3e07afa936ba1144513922d8
+    [login] => 1
+    [user_name] => user_1
+)
+]
+_SESSION : 
+[Array
+(
+    [form_token] => 1ca6a1eb3e07afa936ba1144513922d8
+    [login] => 1
+    [user_name] => user_1
+)
+]
+_SESSION : 
+[Array
+(
+    [form_token] => 1ca6a1eb3e07afa936ba1144513922d8
+    [login] => 1
+    [user_name] => user_1
+)
+]
+_SESSION : 
+[Array
+(
+    [form_token] => 1ca6a1eb3e07afa936ba1144513922d8
+    [login] => 1
+    [user_name] => user_1
+)
+]
+_SESSION : 
+[Array
+(
+    [form_token] => 21892a5980f443e30db447e550f0bdd1
+    [login] => 1
+    [user_name] => user_1
+)
+]
+_SESSION : 
+[Array
+(
+    [form_token] => 21892a5980f443e30db447e550f0bdd1
+    [login] => 1
+    [user_name] => user_1
+)
+]
+_SESSION : 
+[Array
+(
+    [form_token] => 21892a5980f443e30db447e550f0bdd1
+    [login] => 1
+    [user_name] => user_1
+)
+]
+_SESSION : 
+[Array
+(
+    [form_token] => 21892a5980f443e30db447e550f0bdd1
+    [login] => 1
+    [user_name] => user_1
+)
+]
+_SESSION : 
+[Array
+(
+    [form_token] => 21892a5980f443e30db447e550f0bdd1
+    [login] => 1
+    [user_name] => user_1
+)
+]
+login works!!!
+cur_row 
+[Array
+(
+    [user_id] => 1
+    [user_name] => user_1
+    [password] => b59c67bf196a4758191e42f76670ceba
+    [user_email] => handtemple@gmail.com
+    [last_login_time] => 
+)
+]
+_SESSION : 
+[Array
+(
+    [form_token] => a938c678e63d2ae5cdab62dfebd8bcf9
+    [login] => 1
+    [user_name] => user_1
+    [user_id] => 1
+)
+]
+_SESSION : 
+[Array
+(
+    [form_token] => a938c678e63d2ae5cdab62dfebd8bcf9
+    [login] => 1
+    [user_name] => user_1
+    [user_id] => 1
+)
+]
+result->getNumRows()!=1, == 0
+result->getNumRows()!=1, == 0
+login works!!!
+cur_row 
+[Array
+(
+    [user_id] => 9
+    [user_name] => user_9
+    [password] => fa246d0262c3925617b0c72bb20eeb1d
+    [user_email] => daminglu@mail.com
+    [last_login_time] => 
+)
+]
+_SESSION : 
+[Array
+(
+    [form_token] => 4126d10d8b22eb066bd87d153306ff9b
+    [login] => 1
+    [user_name] => user_9
+    [user_id] => 9
+)
+]

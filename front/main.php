@@ -1,6 +1,8 @@
 <?php
 session_start();
 $user_name = isset($_SESSION['user_name'])?$_SESSION['user_name']:'Annoymous';
+$user_id = isset($_SESSION['user_id'])?$_SESSION['user_id']:'no ID';
+
 file_put_contents(
 	"/Applications/XAMPP/htdocs/wc2014/back/logs/log4",
 	"_SESSION : \n[".print_r($_SESSION,true)."]\n",
@@ -19,6 +21,15 @@ $testName = "testNamehaha";
 		<title>Daming's World Cup Casino</title>
 		<meta name="generator" content="Bootply" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+        </script>
+
+        <!-- Import AngularJS library -->
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js">
+        </script>
+
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<!--[if lt IE 9]>
 			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -26,16 +37,24 @@ $testName = "testNamehaha";
 		<link href="css/styles.css" rel="stylesheet">
         <link href="css/login.css" rel="stylesheet" type="text/css" />
 
+
+        <script type="text/javascript" src="js/main.js"></script>
+
 	</head>
     <!-- class="main_bg_cover frames_fade_in" -->
-	<body class="">
-<div class="page-container">
+	<body ng-app="mainApp" class="">
+
+<div    ng-controller="mainCtrl" class="page-container">
   
 	<!-- top navbar -->
     <div class="row row-offcanvas row-offcanvas-left for_test">
-    <h1> Welcome <?=$user_name?> to Daming's World Cup 2014 Casino !!!</h1>
-    <h1><?=$testName?></h1>
+        <h1> Welcome <?=$user_name?> !!!</h1>
     </div>
+
+    <div class="container-fluid"
+        ng-init="getUserName('<?php echo $user_name; ?>','<?php echo $user_id; ?>')" >
+    </div>
+
     <div class="container-fluid">
       <div class="row row-offcanvas row-offcanvas-left">
         <!--sidebar-->
