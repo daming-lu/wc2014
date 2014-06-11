@@ -1,4 +1,13 @@
 <?php
+session_start();
+
+//$_SESSION['form_token'];
+
+file_put_contents(
+	"./logs/log1",
+	"_SESSION : ".print_r($_SESSION,true)."\n",
+	FILE_APPEND|LOCK_EX
+);
 
 include_once('./db/db_singleton/mysqldatabase.php');
 include_once('./db/db_singleton/mysqlresultset.php');
@@ -9,6 +18,23 @@ $postData = json_decode($data,true);
 
 $user_email     = $postData['email'];
 $user_password  = $postData['password'];
+
+$form_token = $postData['token'];
+
+if($form_token == $_SESSION['form_token']) {
+    file_put_contents(
+    	"./logs/log2",
+    	"form_token == _SESSION['form_token']\n",
+    	FILE_APPEND|LOCK_EX
+    );
+} else {
+    file_put_contents(
+    	"./logs/log2",
+    	"form_token != _SESSION['form_token']\n NOOOOOOOO!",
+    	FILE_APPEND|LOCK_EX
+    );
+}
+
 $user_password = md5($user_password);
 
 $db = MySqlDatabase::getInstance();
@@ -28,34 +54,69 @@ file_put_contents(
 );
 
 $result = $db->iterate($query);
-
+file_put_contents(
+	"./logs/log5",
+	"result == ".print_r($result,true)."\n",
+	FILE_APPEND|LOCK_EX
+);
 if ($result->getNumRows()!=1) {
+    $count = $result->getNumRows();
     file_put_contents(
     	"./logs/log4",
-    	"result->getNumRows()!=1"."\n",
+    	"result->getNumRows()!=1, == $count"."\n",
     	FILE_APPEND|LOCK_EX
     );
+    $_SESSION['login'] = "";
+    //header ("Location: ../front/main.php");
+    //header ("Location: http://damingl-mbp15ret.zoosk.local/wc2014/front/main.php");
+    header('HTTP/1.0' . ' ' . '401' . ' ' . 'OK');
+    //$GLOBALS['http_response_code'] = '200';
+    exit();
 } else {
     file_put_contents(
     	"./logs/log4",
     	"login works!!!"."\n",
     	FILE_APPEND|LOCK_EX
     );
-    session_start();
+    $cur_row = $result->getResultResource();
+
+
+    $row = mysql_fetch_assoc($result->getResultResource());
+    file_put_contents(
+    	"./logs/log4",
+    	"cur_row \n[".print_r($row,true)."]\n",
+    	FILE_APPEND|LOCK_EX
+    );
     $_SESSION['login'] = "1";
+
+
+
+    $_SESSION['user_name'] = $row['user_name'];
     //header ("Location: ../front/main.php");
     //header ("Location: http://damingl-mbp15ret.zoosk.local/wc2014/front/main.php");
     header('HTTP/1.0' . ' ' . '200' . ' ' . 'OK');
     $GLOBALS['http_response_code'] = '200';
 
-
+    /*
     //echo '200';
     HttpResponse::status(200);
     HttpResponse::setContentType('text/xml');
     HttpResponse::setHeader('From', 'Lymber');
     HttpResponse::setData('<?xml version="1.0"?><note>Thank you for posting your data! We love php!</note>');
     HttpResponse::send();    //exit;
+    */
+    http_response_code(200);
 
+    $redirectToMainPage = array (
+        "whereTo"           => "main",
+        "Name"              => "To Get UserName",
+        "isLoginSuccessful" => true
+    );
+    //$_SESSION["user_name"] = "user_name";
+
+    $encoded = json_encode($redirectToMainPage);
+
+    exit($encoded);
     //$b = http_response_code(200);
 
 }

@@ -1,5 +1,4 @@
 *.idea
 *.idea/*
 .DS_S*
-front/pics/*
-back/logs/*
+./back/logs/*

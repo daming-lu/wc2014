@@ -1,3 +1,16 @@
+<?php
+session_start();
+$user_name = isset($_SESSION['user_name'])?$_SESSION['user_name']:'Annoymous';
+file_put_contents(
+	"/Applications/XAMPP/htdocs/wc2014/back/logs/log4",
+	"_SESSION : \n[".print_r($_SESSION,true)."]\n",
+	FILE_APPEND|LOCK_EX
+);
+if(!isset($_SESSION['login'])|| $_SESSION['login']!='1') {
+    header ("Location: login_signup.php");
+}
+$testName = "testNamehaha";
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -20,7 +33,8 @@
   
 	<!-- top navbar -->
     <div class="row row-offcanvas row-offcanvas-left for_test">
-    <h1> Welcome to Daming's World Cup 2014 Casino !!!</h1>
+    <h1> Welcome <?=$user_name?> to Daming's World Cup 2014 Casino !!!</h1>
+    <h1><?=$testName?></h1>
     </div>
     <div class="container-fluid">
       <div class="row row-offcanvas row-offcanvas-left">

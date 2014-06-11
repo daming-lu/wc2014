@@ -59,6 +59,8 @@ $api_response_code = array(
     $user_name      = $postData['fullName'];
     $user_email     = $postData['email'];
     $user_password  = $postData['password'];
+    $user_password = md5($user_password);
+
 file_put_contents(
     "./logs/log5",
     "$user_name : \n".print_r($user_name,true)."\n",

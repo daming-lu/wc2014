@@ -1,3 +1,20 @@
+<?php
+
+/*** begin our session ***/
+session_start();
+
+/*** set a form token ***/
+$form_token = md5( uniqid('auth', true) );
+$cur_time = time();
+//$form_token = md5( uniqid($cur_time, true) );
+
+if (empty($_SESSION['uname'])){
+    //header("location:http://www.bing.com");
+}
+/*** set the session form token ***/
+$_SESSION['form_token'] = $form_token;
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
@@ -34,6 +51,16 @@
         <div ng-app="loginApp" class="container">
             <div ng-controller="LoginCtrl" class="row">
 
+                haha
+                <input type="hidden" name="form_token" ng-model="token1" value="<?php echo $form_token; ?>" />
+                xixi
+                <h1><?php echo $cur_time; ?></h1>
+                <input type="hidden" name="form_token" ng-model="token" value="<?php echo $cur_time; ?>" />
+                <div class="container-fluid"
+                    ng-init="userInit('<?php echo $form_token; ?>')" >
+                </div>
+
+                <h1><?php echo $form_token; ?></h1>
                 <!-- Login Page -->
                 <div ng-show="isLogin" class="col-md-4 col-md-offset-4">
                     <div class="panel panel-default pad_top">
@@ -65,7 +92,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="form-group last">
                                     <div class="col-sm-offset-3 col-sm-9">
                                         <button type="submit" class="btn btn-success btn-sm" ng-click="loginUser()">Sign in</button> <button type="reset" class="btn btn-default btn-sm">Reset</button>
