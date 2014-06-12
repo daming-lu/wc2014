@@ -4,13 +4,9 @@
 session_start();
 
 /*** set a form token ***/
-$form_token = md5( uniqid('auth', true) );
 $cur_time = time();
 $form_token = md5( uniqid($cur_time, true) );
 
-if (empty($_SESSION['uname'])){
-    //header("location:http://www.bing.com");
-}
 /*** set the session form token ***/
 $_SESSION['form_token'] = $form_token;
 ?>
@@ -102,11 +98,12 @@ $_SESSION['form_token'] = $form_token;
                 </div>
 
                 <!-- Login Page -->
-                <div ng-show="isLogin && !showRules" class="col-md-4 col-md-offset-4">
+                <div ng-show="isLogin && !showRules" class="col-md-6 col-md-offset-3">
                     <div class="panel panel-default pad_top">
                         <div class="panel-heading">
                             <strong>Login</strong>
                         </div>
+                        <h4 ng-if="hasError" class="error">{{errorMsg}}</h4>
                         <div class="panel-body">
                             <form class="form-horizontal" role="form">
                                 <div class="form-group">
@@ -160,6 +157,7 @@ $_SESSION['form_token'] = $form_token;
                         <div class="panel-heading">
                             <strong>Register</strong>
                         </div>
+                        <h4 ng-if="hasError">{{errorMsg}}</h4>
                         <div class="panel-body">
                             <form class="form-horizontal" role="form">
                                 <div class="form-group">

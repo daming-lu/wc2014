@@ -21,10 +21,13 @@ catch (Exception $e) {
 // get the left ranking
 $conciseRanking = getConciseRanking($db);
 
+$upcomingMatches = getUpcomingMatches($db);
+
 header('HTTP/1.0' . ' ' . '200' . ' ' . 'OK');
 
 $responseToMainPage = array (
-    'conciseRanking'   => $conciseRanking
+    'conciseRanking'    => $conciseRanking,
+    'upcomingMatches'   => $upcomingMatches
 );
 
 $encoded = json_encode($responseToMainPage);
@@ -32,8 +35,31 @@ $encoded = json_encode($responseToMainPage);
 
 
 exit($encoded);
+//------------------------------------------------------------------------------------------------
+function getUpcomingMatches($db, $time="") {
+    $result = array();
 
+    $curTime = $time;
+    if($time=="") {
+        //$curTime = DB_Constants::getTime("2014-06-12 12:00:00 ");
+        $curTime = DB_Constants::getTime();
+        $curDay = DB_Constants::getTimeToday();
+    }
+    $query = "SELECT match_id, left_team, right_team, match_time FROM matches WHERE match_time BETWEEN '$curTime' AND DATE_ADD('$curDay',INTERVAL + 1 DAY)";
 
+    foreach ($db->iterate($query) as $row) {
+        $result []= array(
+            'match_id'      => $row->match_id,
+            'left_team'     => $row->left_team,
+            'right_team'    => $row->right_team,
+            'match_time'    => $row->match_time
+        );
+        //break;
+    }
+    return $result;
+}
+
+//------------------------------------------------------------------------------------------------
 function getConciseRanking($db) {
     $conciseRanking = array();
 
@@ -42,11 +68,6 @@ function getConciseRanking($db) {
     $handle = fopen("nextMatchID.txt", "r");
     $line = fgets($handle);
     $nextMatchID = intval($line);
-    file_put_contents(
-    	"./logs/log2",
-    	"curMatchID : ".print_r($nextMatchID,true)."\n",
-    	FILE_APPEND|LOCK_EX
-    );
 
     // you have to deal with nextMatch anyway:
     $next_match_name = $match_prefix.strval($nextMatchID);
@@ -68,7 +89,7 @@ function getConciseRanking($db) {
     if ($nextMatchID == 1) {
         // retrieve user guesses
         $conciseRanking['user_guesses'] = array();
-        $query = "SELECT user_id, user_name, $next_match_name, user_score FROM user_guesses ORDER BY user_score DESC LIMIT 30";
+        $query = "SELECT user_id, user_name, $next_match_name, user_score FROM user_guesses ORDER BY user_score DESC LIMIT 50";
         foreach ($db->iterate($query) as $row) {
             $conciseRanking['user_guesses'] []= array(
                 'user_name' => $row->user_name,
@@ -96,7 +117,7 @@ function getConciseRanking($db) {
         );
         // retrieve user guesses
         $conciseRanking['user_guesses'] = array();
-        $query = "SELECT user_id, user_name, $past_match_name, $next_match_name, user_score FROM user_guesses ORDER BY user_score DESC LIMIT 30";
+        $query = "SELECT user_id, user_name, $past_match_name, $next_match_name, user_score FROM user_guesses ORDER BY user_score DESC LIMIT 50";
         foreach ($db->iterate($query) as $row) {
             $conciseRanking['user_guesses'] []= array(
                 'user_name' => $row->user_name,
@@ -108,3 +129,4 @@ function getConciseRanking($db) {
         return $conciseRanking;
     }
 }
+//------------------------------------------------------------------------------------------------

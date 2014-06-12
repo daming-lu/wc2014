@@ -4,101 +4,75 @@ include_once('./db/db_singleton/mysqldatabase.php');
 include_once('./db/db_singleton/mysqlresultset.php');
 include_once('./constants.php');
 
-
-$format = 'json';	
+session_start();
 
 $data = file_get_contents("php://input");
 $postData = json_decode($data,true);
 
-file_put_contents(
-	"./logs/log1",
-	"postData : \n".print_r($postData,true)."\n",
-	FILE_APPEND|LOCK_EX
-);
-
-$api_response_code = array(
-    0 => array('HTTP Response' => 400, 'Message' => 'Unknown Error'),
-    1 => array('HTTP Response' => 200, 'Message' => 'Success'),
-    2 => array('HTTP Response' => 403, 'Message' => 'HTTPS Required'),
-    3 => array('HTTP Response' => 401, 'Message' => 'Authentication Required'),
-    4 => array('HTTP Response' => 401, 'Message' => 'Authentication Failed'),
-    5 => array('HTTP Response' => 404, 'Message' => 'Invalid Request'),
-    6 => array('HTTP Response' => 400, 'Message' => 'Invalid Response Format')
-);
-
-
-
-	$response['code'] = 1;
-	$response['status'] = $api_response_code[ $response['code'] ]['HTTP Response'];
-	//$response['data'] = 'Hello World, Daming\'s here :)';
-
-	$data = file_get_contents("users.json");
-	$response['data'] = json_decode($data,true);
-
-
 // >> test db
-    // get the MySqlDatabase instance
-    $db = MySqlDatabase::getInstance();
-    try {
-        $conn = $db->connect(DB_Constants::$db_url, DB_Constants::$db_username, DB_Constants::$db_password, DB_Constants::$db_name);
-    }
-    catch (Exception $e) {
-        die($e->getMessage());
-    }
-
-    $query = "SELECT * FROM users LIMIT 10";
-    foreach ($db->iterate($query) as $row) {
-        file_put_contents(
-        	"./logs/log2",
-        	"row : \n".print_r($row,true)."\n",
-        	FILE_APPEND|LOCK_EX
-        );
-    }
-
+// get the MySqlDatabase instance
+$db = MySqlDatabase::getInstance();
+try {
+    $conn = $db->connect(DB_Constants::$db_url, DB_Constants::$db_username, DB_Constants::$db_password, DB_Constants::$db_name);
+}
+catch (Exception $e) {
+    die($e->getMessage());
+}
 
     $user_name      = $postData['fullName'];
     $user_email     = $postData['email'];
     $user_password  = $postData['password'];
-    $user_password = md5($user_password);
 
-file_put_contents(
-    "./logs/log5",
-    "$user_name : \n".print_r($user_name,true)."\n",
-    FILE_APPEND|LOCK_EX
-);
-file_put_contents(
-    "./logs/log5",
-    "$user_email : \n".print_r($user_email,true)."\n",
-    FILE_APPEND|LOCK_EX
-);
-file_put_contents(
-    "./logs/log5",
-    "$user_password : \n".print_r($user_password,true)."\n",
-    FILE_APPEND|LOCK_EX
-);
+$username = filter_var($user_name, FILTER_SANITIZE_STRING);
+$password = filter_var($user_password, FILTER_SANITIZE_STRING);
 
+$user_password = md5($user_password);
+
+try {
     $query = "INSERT INTO users(user_name, password,user_email) VALUES ('$user_name','$user_password', '$user_email')"; // check dup email !
-file_put_contents(
-    "./logs/log4",
-    "$query : \n".print_r($query,true)."\n",
-    FILE_APPEND|LOCK_EX
-);
+
     $last_id = $db->insert($query);
-    file_put_contents(
-        "./logs/log3",
-        "$last_id : \n".print_r($last_id,true)."\n",
-        FILE_APPEND|LOCK_EX
-    );
 
-if( strcasecmp($format,'json') == 0 ){
-	// Set HTTP Response Content Type
-	header('Content-Type: application/json; charset=utf-8');
+    $query = "SELECT user_id FROM users WHERE user_email = '$user_email'"; // check dup email !
 
-	// Format data into a JSON response
-	$json_response = json_encode($response);
+    $user_id = "";
 
-	// Deliver formatted data
-	echo $json_response;
+    $result = $db->iterate($query);
+    if ($result->getNumRows() != 1) {
+        // dup!
+        header('HTTP/1.0' . ' ' . '401' . ' ' . 'duplicate account!');
+        exit('duplicate account!');
+    }
+    foreach ($result as $row) {
+        $user_id = $row->user_id;
+        break;
+    }
+    $query = "INSERT INTO user_guesses (user_id, user_name) VALUES ('$user_id','$user_name')"; // check dup email !
 
+
+    $last_id = $db->insert($query);
+
+} catch(Exception $e)
+{
+   /*** check if the username already exists ***/
+   if( $e->getCode() == 23000)
+   {
+       $message = 'Username already exists';
+   }
+   else
+   {
+       /*** if we are here, something has gone wrong with the database ***/
+       $message = 'We are unable to process your request. Please try again later"';
+   }
 }
+
+$_SESSION['user_name'] = $user_name;
+$_SESSION['user_id'] = $user_id;
+$_SESSION['login'] = sha1($user_name.$user_id);
+
+header('HTTP/1.0' . ' ' . '200' . ' ' . 'OK');
+$GLOBALS['http_response_code'] = '200';
+
+http_response_code(200);
+exit();
 ?>

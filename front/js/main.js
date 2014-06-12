@@ -1,13 +1,13 @@
 var mainApp = angular.module('mainApp', []);
 
 mainApp.controller('mainCtrl', ['$scope', '$http',function($scope, $http, $location, $window) {
-    console.log("run?");
     $scope.userName = "";
     $scope.userID = "";
 
     $scope.isReady = false;
     $scope.conciseRanking = [];
 
+    $scope.upcomingMatches = [];
 
     // initialize all the data for main page !!!
     var initialize = function() {
@@ -22,27 +22,47 @@ mainApp.controller('mainCtrl', ['$scope', '$http',function($scope, $http, $locat
             data: params
         }).then(
             function(response) {
-                console.log("for main page");
-                console.log(JSON.stringify(response));
                 $scope.conciseRanking = response['data']['conciseRanking'];
-                console.log('conciseRanking');
-                console.log(JSON.stringify($scope.conciseRanking));
+                $scope.upcomingMatches = response['data']['upcomingMatches'];
                 $scope.isReady = true
             },
             function(error) {
-                console.log("Error");
                 //window.location.href = "http://damingl-mbp15ret.zoosk.local/wc2014/front/login_signup.php";
-                window.location.href = "http://damingl-mbp15ret.zoosk.local/wc2014/front/loginNonPHP.html";
+                window.location.href = urlPrefix + "wc2014/front/login_signup.php";
             }
         );
     };
 
     $scope.getUserName = function(userName,userID) {
         $scope.userName = userName;
-        console.log("userName : \n" + $scope.userName);
         $scope.userID = userID;
-        console.log("userID : \n" + $scope.userID);
         initialize();
     };
 
+    $scope.submitStatus = "";
+
+    $scope.guess = {};
+    $scope.submitGuess = function(inputGuess) {
+          var today = new Date();
+        var url = urlPrefix + "wc2014/back/submitGuess.php";
+        var params = {
+            'userName'  : $scope.userName,
+            'userID'    : $scope.userID,
+            'guesses'   : inputGuess,
+            'timestamp' : today
+        };
+
+        $http({
+            method: 'POST',
+            url: url,
+            data: params
+        }).then(
+            function(response) {
+                $scope.submitStatus = response['data'];
+            },
+            function(error) {
+                $scope.submitStatus = "Your submission failed. Please check your format";
+              }
+        );
+    }
 }]);

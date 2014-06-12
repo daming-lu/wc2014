@@ -1,13 +1,13 @@
 <?php
 session_start();
 
-//$_SESSION['form_token'];
-
-file_put_contents(
-	"./logs/log1",
-	"_SESSION : ".print_r($_SESSION,true)."\n",
-	FILE_APPEND|LOCK_EX
-);
+if (!isset($_SESSION['CREATED'])) {
+    $_SESSION['CREATED'] = time();
+} else if (time() - $_SESSION['CREATED'] > 1800) {
+    // session started more than 30 minutes ago
+    session_regenerate_id(true);    // change session ID for the current session an invalidate old session ID
+    $_SESSION['CREATED'] = time();  // update creation time
+}
 
 include_once('./db/db_singleton/mysqldatabase.php');
 include_once('./db/db_singleton/mysqlresultset.php');
@@ -18,21 +18,13 @@ $postData = json_decode($data,true);
 
 $user_email     = $postData['email'];
 $user_password  = $postData['password'];
+$password = filter_var($user_password, FILTER_SANITIZE_STRING);
 
 $form_token = $postData['token'];
 
-if($form_token == $_SESSION['form_token']) {
-    file_put_contents(
-    	"./logs/log2",
-    	"form_token == _SESSION['form_token']\n",
-    	FILE_APPEND|LOCK_EX
-    );
-} else {
-    file_put_contents(
-    	"./logs/log2",
-    	"form_token != _SESSION['form_token']\n NOOOOOOOO!",
-    	FILE_APPEND|LOCK_EX
-    );
+if($form_token != $_SESSION['form_token']) {
+    header('HTTP/1.0' . ' ' . '401' . ' ' . 'invalid login');
+    exit('invalid login');
 }
 
 $user_password = md5($user_password);
@@ -46,80 +38,25 @@ catch (Exception $e) {
 }
 
 $query = "SELECT * FROM users WHERE user_email = '$user_email' AND password = '$user_password'";
-// to trigger return results that is more than 1, we can simply remove one 'where' so that
-// users with same password can be returned :)
-
-file_put_contents(
-	"./logs/log5",
-	"$query",
-	FILE_APPEND|LOCK_EX
-);
 
 $result = $db->iterate($query);
-file_put_contents(
-	"./logs/log5",
-	"result == ".print_r($result,true)."\n",
-	FILE_APPEND|LOCK_EX
-);
+
 if ($result->getNumRows()!=1) {
     $count = $result->getNumRows();
-    file_put_contents(
-    	"./logs/log4",
-    	"result->getNumRows()!=1, == $count"."\n",
-    	FILE_APPEND|LOCK_EX
-    );
     $_SESSION['login'] = "";
-    //header ("Location: ../front/main.php");
-    //header ("Location: http://damingl-mbp15ret.zoosk.local/wc2014/front/main.php");
     header('HTTP/1.0' . ' ' . '401' . ' ' . 'OK');
-    //$GLOBALS['http_response_code'] = '200';
-    exit();
+    exit('login failed!');
 } else {
-    file_put_contents(
-    	"./logs/log4",
-    	"login works!!!"."\n",
-    	FILE_APPEND|LOCK_EX
-    );
+
     $cur_row = $result->getResultResource();
-
-
     $row = mysql_fetch_assoc($result->getResultResource());
-    file_put_contents(
-    	"./logs/log4",
-    	"cur_row \n[".print_r($row,true)."]\n",
-    	FILE_APPEND|LOCK_EX
-    );
-    $_SESSION['login'] = "1";
 
-
-
+    $_SESSION['login'] = sha1($row['user_name'].$row['user_id']);
     $_SESSION['user_name'] = $row['user_name'];
     $_SESSION['user_id'] = $row['user_id'];
-    //header ("Location: ../front/main.php");
-    //header ("Location: http://damingl-mbp15ret.zoosk.local/wc2014/front/main.php");
     header('HTTP/1.0' . ' ' . '200' . ' ' . 'OK');
     $GLOBALS['http_response_code'] = '200';
 
-    /*
-    //echo '200';
-    HttpResponse::status(200);
-    HttpResponse::setContentType('text/xml');
-    HttpResponse::setHeader('From', 'Lymber');
-    HttpResponse::setData('<?xml version="1.0"?><note>Thank you for posting your data! We love php!</note>');
-    HttpResponse::send();    //exit;
-    */
     http_response_code(200);
-
-    $redirectToMainPage = array (
-        "whereTo"           => "main",
-        "Name"              => "To Get UserName",
-        "isLoginSuccessful" => true
-    );
-    //$_SESSION["user_name"] = "user_name";
-
-    $encoded = json_encode($redirectToMainPage);
-
-    exit($encoded);
-    //$b = http_response_code(200);
-
+    exit();
 }

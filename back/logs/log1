@@ -1,11 +1,65 @@
-conciseRanking : Array
+postData : 
+Array
 (
-    [PastMatch] => 
-    [Next] => Array
+    [userName] => user_1
+    [userID] => 1
+    [guesses] => Array
         (
-            [left_team] => BRAZIL
-            [right_team] => CROATIA
+            [1] => 1:1
         )
 
+    [timestamp] => 2014-06-12T17:45:04.138Z
 )
 
+query : 
+UPDATE user_guesses ug SET ug.match_1 = '1:1' WHERE ug.user_guess_id = 1
+_SESSION : Array
+(
+    [form_token] => 608fad017e8ba30180f41c2edd6bee99
+    [login] => 1
+    [user_name] => user_1
+    [user_id] => 1
+)
+
+postData : 
+Array
+(
+    [userName] => test4
+    [userID] => 43
+    [guesses] => Array
+        (
+        )
+
+    [timestamp] => 2014-06-12T18:24:39.832Z
+)
+
+postData : 
+Array
+(
+    [userName] => test4
+    [userID] => 43
+    [guesses] => Array
+        (
+            [1] => 1:1
+        )
+
+    [timestamp] => 2014-06-12T18:25:04.487Z
+)
+
+query : 
+UPDATE user_guesses ug SET ug.match_1 = '1:1' WHERE ug.user_guess_id = 43
+postData : 
+Array
+(
+    [userName] => test4
+    [userID] => 43
+    [guesses] => Array
+        (
+            [1] => 1:2
+        )
+
+    [timestamp] => 2014-06-12T18:27:00.671Z
+)
+
+query : 
+UPDATE user_guesses ug SET ug.match_1 = '1:2' WHERE ug.user_id = 43

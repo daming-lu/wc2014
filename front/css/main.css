@@ -9,3 +9,73 @@
 .table_team {
     color: #000000;
 }
+
+.main_bg_cover {
+    overflow-x: hidden;
+    background: url("http://i.imgur.com/G9yOkW3.jpg") top center no-repeat fixed #47403a;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color : #000000;
+    text-align: left;
+}
+
+.align-left {
+    text-align:center;
+}
+.for-test {
+    text-align:center;
+}
+
+h2
+{
+text-align:center;
+}
+.guess-score {
+    width: 3em;
+}
+
+.frames_fade_in {
+    margin-top: 25px;
+
+    -webkit-animation: fadein 3s; /* Safari and Chrome */
+       -moz-animation: fadein 3s; /* Firefox */
+        -ms-animation: fadein 3s; /* Internet Explorer */
+         -o-animation: fadein 3s; /* Opera */
+            animation: fadein 3s;
+}
+
+.go-back-button {
+    margin-left: 211px;
+    margin-top: 1px;
+}
+
+.my-submit-button {
+    margin-left: 320px;
+    margin-top: 1px;
+}
+
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari and Chrome */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}​

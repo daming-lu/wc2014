@@ -35,7 +35,7 @@ CREATE TABLE user_guesses(
   user_guess_id SMALLINT NOT NULL AUTO_INCREMENT,
   user_id SMALLINT NOT NULL,
   user_name varchar (50),
-  user_score SMALLINT,
+  user_score SMALLINT DEFAULT 0,
   match_1 varchar(10),
   match_1_is_correct BOOLEAN,
   PRIMARY KEY(user_guess_id),

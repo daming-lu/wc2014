@@ -1,0 +1,6 @@
+query : 
+SELECT left_team FROM matches WHERE match_time >= DATE_SUB('2014-06-12T17:45:04.138Z',INTERVAL 7 HOUR) AND match_id = '1'
+query : 
+SELECT left_team FROM matches WHERE match_time >= DATE_SUB('2014-06-12T18:25:04.487Z',INTERVAL 7 HOUR) AND match_id = '1'
+query : 
+SELECT left_team FROM matches WHERE match_time >= DATE_SUB('2014-06-12T18:27:00.671Z',INTERVAL 7 HOUR) AND match_id = '1'
