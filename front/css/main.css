@@ -1,3 +1,11 @@
 .table_error {
     background-color: #f2dede;
 }
+
+.table_header {
+    color: #0000FF;
+}
+
+.table_team {
+    color: #000000;
+}

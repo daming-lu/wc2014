@@ -14,6 +14,8 @@ loginApp.controller('LoginCtrl', ['$scope', '$http',function($scope, $http, $loc
         $scope.isLogin = true;
     };
 
+    $scope.showRules = false;
+
     newUser.email = "haha@gmail.com";
     $scope.nUser = newUser;
 
@@ -21,6 +23,16 @@ loginApp.controller('LoginCtrl', ['$scope', '$http',function($scope, $http, $loc
     $scope.email = "";
     $scope.password = "";
     $scope.token = "";
+
+    $scope.switchToRules = function () {
+        $scope.showRules = true;
+        console.log("switchToRules");
+    };
+
+    $scope.hideRules = function () {
+        $scope.showRules = false;
+        console.log("switchToRules");
+    };
 
     $scope.signUpNewUser = function () {
         //var url = "http://peirongli.dreamhosters.com/worldcup/dev/back/signUpNewUser.php";

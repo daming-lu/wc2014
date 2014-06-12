@@ -51,7 +51,8 @@ $testName = "testNamehaha";
   
 	<!-- top navbar -->
     <div class="row row-offcanvas row-offcanvas-left for_test">
-        <h1> Welcome <?=$user_name?> !!!</h1>
+        <h2> Welcome <?=$user_name?> !</h2>
+        <br />
     </div>
 
     <div class="container-fluid"
@@ -75,28 +76,32 @@ $testName = "testNamehaha";
                     <div class="panel-body">
 
                         <table class="table table-bordered">
-                            <thead>
                             <th>
-                                <td rowspan="2">User Name</td>
-                                <td>Passed Match</td>
-                                <td>Current Match</td>
-                                <td rowspan="2">Score</td>
+                                <td class="table_header" rowspan="2"><b >User Name</b></td>
+                                <td class="table_header"><b>Past Match</b></td>
+                                <td class="table_header"><b>Next Match</b></td>
+                                <td class="table_header" rowspan="2"><b>Score</b></td>
                             </th>
-                            </thead>
-                            <tbody ng-repeat="(user_id, matches) in conciseRanking">
+                            <tr >
+                                <td>&nbsp;</td>
+                                <td class="table_team" ng-if="conciseRanking.PastMatch!=''">{{conciseRanking.PastMatch.left_team}} - {{conciseRanking.PastMatch.right_team}}</td>
+                                <td class="table_team" ng-if="conciseRanking.PastMatch==''">&nbsp;</td>
+                                <td class="table_team">{{conciseRanking.NextMatch.left_team}} - {{conciseRanking.NextMatch.right_team}}</td>
+                            </tr>
+                            <tbody ng-repeat="(user_id, info) in conciseRanking.user_guesses">
                             <tr>
-                                <td>1</td>
+                                <td>{{$index + 1}}</td>
                                 <td>
-                                    {{user_id}}
+                                    {{info.user_name}}
                                 </td>
                                 <td>
-                                    {{matches.match_1}}
+                                    {{info.past_match}}
                                 </td>
                                 <td>
-                                    {{matches.match_2}}
+                                    {{info.next_match}}
                                 </td>
                                 <td>
-                                    0
+                                    {{info.user_score}}
                                 </td>
                             </tr>
                             </tbody>

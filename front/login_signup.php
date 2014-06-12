@@ -6,7 +6,7 @@ session_start();
 /*** set a form token ***/
 $form_token = md5( uniqid('auth', true) );
 $cur_time = time();
-//$form_token = md5( uniqid($cur_time, true) );
+$form_token = md5( uniqid($cur_time, true) );
 
 if (empty($_SESSION['uname'])){
     //header("location:http://www.bing.com");
@@ -21,7 +21,6 @@ $_SESSION['form_token'] = $form_token;
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta name="generator" content="HTML Tidy for Linux/x86 (vers 25 March 2009), see www.w3.org" />
-        <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
 
         <title>Daming's 2014 World Cup Casino</title><!-- Import jQuery -->
 
@@ -37,6 +36,8 @@ $_SESSION['form_token'] = $form_token;
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js" type="text/javascript">
         </script>
 
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
         <!-- Import application specific code -->
         <script type="text/javascript" src="js/constants.js"></script>
 
@@ -51,18 +52,57 @@ $_SESSION['form_token'] = $form_token;
         <div ng-app="loginApp" class="container">
             <div ng-controller="LoginCtrl" class="row">
 
-                haha
-                <input type="hidden" name="form_token" ng-model="token1" value="<?php echo $form_token; ?>" />
-                xixi
-                <h1><?php echo $cur_time; ?></h1>
-                <input type="hidden" name="form_token" ng-model="token" value="<?php echo $cur_time; ?>" />
                 <div class="container-fluid"
                     ng-init="userInit('<?php echo $form_token; ?>')" >
                 </div>
+                <div ng-show="showRules" class="col-md-10 col-md-offset-1">
+                    <div class="panel panel-default pad_top">
+                        <div class="panel-heading">
+                            <strong>Game Rules : </strong>
+                        </div>
+                        <div class="panel-body">
+                            <p>
+                            <b>Welcome to Daming's World Cup 2014 Guess Club!</b> <br /><br />
+                            The rules are simple : you just need to try to correctly guess the results of the matches. To make things more fun, we give different weights to matches in different stages:
+                            <li>
+                                For each <b>Group</b> match, you earn <b>3</b> points if you guess it correctly; (48 matches in total)
+                            </li>
+                            <br />
+                            <li>
+                                For each <b>Round of 16</b> match, you earn <b>4</b> points if you guess it correctly; (8 matches in total)
+                            </li>
+                            <br />
+                            <li>
+                                For each <b>Quarter-final</b> match, you earn <b>5</b> points if you guess it correctly; (4 matches in total)
+                            </li>
+                            <br />
+                            <li>
+                                For each <b>Semi-final</b> match, you earn <b>6</b> points if you guess it correctly; (2 matches in total)
+                            </li>
+                            <br />
+                            <li>
+                                For the <b>3rd-place</b> match, you earn <b>7</b> points if you guess it correctly; (only 1 match)
+                            </li>
+                            <br />
+                            <li>
+                                For the <b>Final</b> match, you earn <b>8</b> points if you guess it correctly; (only 1 match)
+                            </li>
+                            <br /><br />
+                            The <b>Top 3</b> players with the highest scores will be awarded:
+                            <br /><br /><br />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Amazon Gift Card ($50, $30, $20)</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<i>Courtesy of Daming</i>)
+                            <br /><br /><br />
+                            You can also choose to get paid in RMB by 支付宝 :)
 
-                <h1><?php echo $form_token; ?></h1>
+                            <a class="btn btn-lg btn-info go-back-button" href="#" ng-click="hideRules()">
+                                <i class="icon-info-sign"></i> Go Back
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Login Page -->
-                <div ng-show="isLogin" class="col-md-4 col-md-offset-4">
+                <div ng-show="isLogin && !showRules" class="col-md-4 col-md-offset-4">
                     <div class="panel panel-default pad_top">
                         <div class="panel-heading">
                             <strong>Login</strong>
@@ -86,6 +126,12 @@ $_SESSION['form_token'] = $form_token;
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-9 control-label"><i>Not familiar with the rules?  </i></label>
+                                    <a class="btn btn-small btn-info" href="#" ng-click="switchToRules()">
+                                      <i class="icon-info-sign"></i> Info</a>
+                                </div>
+
+                                <div class="form-group">
                                     <div class="col-sm-offset-3 col-sm-9">
                                         <div class="checkbox">
                                             <label><input type="checkbox" /> Remember me</label>
@@ -93,8 +139,8 @@ $_SESSION['form_token'] = $form_token;
                                     </div>
                                 </div>
                                 <div class="form-group last">
-                                    <div class="col-sm-offset-3 col-sm-9">
-                                        <button type="submit" class="btn btn-success btn-sm" ng-click="loginUser()">Sign in</button> <button type="reset" class="btn btn-default btn-sm">Reset</button>
+                                    <div class="col-sm-offset-5 col-sm-9">
+                                        <button type="submit" class="btn btn-success btn-md" ng-click="loginUser()">Sign in</button> <button type="reset" class="btn btn-default btn-md">Reset</button>
                                     </div>
                                 </div>
                             </form>
@@ -104,11 +150,12 @@ $_SESSION['form_token'] = $form_token;
                             Not Registered?
                             <a href="#" ng-click="switchToRegister()">Register here</a>
                         </div>
+
                     </div>
                 </div>
 
                 <!-- Register Page -->
-                <div ng-show="!isLogin" class="col-md-6 col-md-offset-3">
+                <div ng-show="!isLogin && !showRules" class="col-md-6 col-md-offset-3">
                     <div class="panel panel-default pad_top">
                         <div class="panel-heading">
                             <strong>Register</strong>
@@ -136,9 +183,12 @@ $_SESSION['form_token'] = $form_token;
                                     <div class="col-sm-9">
                                         <input class="form-control" ng-model="password" id="inputPassword3" placeholder="Password" required="" type="password" />
                                     </div>
-                                    <h1> {{nUser.email}} </h1>
                                 </div>
-
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-9 control-label"><i>Not familiar with the rules?  </i></label>
+                                    <a class="btn btn-small btn-info" href="#" ng-click="switchToRules()">
+                                      <i class="icon-info-sign"></i> Info</a>
+                                </div>
                                 <div class="form-group">
                                     <div class="col-sm-offset-3 col-sm-9">
                                         <div class="checkbox">
@@ -149,7 +199,7 @@ $_SESSION['form_token'] = $form_token;
 
                                 <div class="form-group last">
                                     <div class="col-sm-offset-3 col-sm-9">
-                                        <button type="submit" class="btn btn-success btn-sm" ng-click="signUpNewUser()">Sign up</button> <button type="reset" class="btn btn-default btn-sm">Reset</button>
+                                        <button type="submit" class="btn btn-success btn-md" ng-click="signUpNewUser()">Sign up</button> <button type="reset" class="btn btn-default btn-md">Reset</button>
                                     </div>
                                 </div>
                             </form>

@@ -1,105 +1,11 @@
-display postData 
-[Array
+conciseRanking : Array
 (
-    [userName] => user_9
-    [userID] => 9
+    [PastMatch] => 
+    [Next] => Array
+        (
+            [left_team] => BRAZIL
+            [right_team] => CROATIA
+        )
+
 )
-]
-display postData 
-[Array
-(
-    [userName] => user_9
-    [userID] => 9
-)
-]
-display postData 
-[Array
-(
-    [userName] => user_9
-    [userID] => 9
-)
-]
-display postData 
-[Array
-(
-    [userName] => user_9
-    [userID] => 9
-)
-]
-display postData 
-[Array
-(
-    [userName] => user_9
-    [userID] => 9
-)
-]
-display postData 
-[Array
-(
-    [userName] => user_9
-    [userID] => 9
-)
-]
-display postData 
-[Array
-(
-    [userName] => user_9
-    [userID] => 9
-)
-]
-display postData 
-[Array
-(
-    [userName] => user_9
-    [userID] => 9
-)
-]
-display postData 
-[Array
-(
-    [userName] => user_9
-    [userID] => 9
-)
-]
-display postData 
-[Array
-(
-    [userName] => user_9
-    [userID] => 9
-)
-]
-display postData 
-[Array
-(
-    [userName] => user_9
-    [userID] => 9
-)
-]
-display postData 
-[Array
-(
-    [userName] => user_9
-    [userID] => 9
-)
-]
-display postData 
-[Array
-(
-    [userName] => user_9
-    [userID] => 9
-)
-]
-display postData 
-[Array
-(
-    [userName] => user_9
-    [userID] => 9
-)
-]
-display postData 
-[Array
-(
-    [userName] => user_9
-    [userID] => 9
-)
-]
+

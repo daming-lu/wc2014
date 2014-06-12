@@ -5,11 +5,10 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    color:blue;
 }
 
 .pad_top {
-    margin-top:140px;
+    margin-top:80px;
 }
 
 .main_bg_cover {
@@ -35,6 +34,11 @@
         -ms-animation: fadein 3s; /* Internet Explorer */
          -o-animation: fadein 3s; /* Opera */
             animation: fadein 3s;
+}
+
+.go-back-button {
+    margin-left: 211px;
+    margin-top: 1px;
 }
 
 @keyframes fadein {
