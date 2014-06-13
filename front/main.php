@@ -108,11 +108,17 @@ if (!isset($_SESSION['CREATED'])) {
                                 <td>
                                     {{info.user_name}}
                                 </td>
-                                <td>
+                                <td ng-if="info.past_match!=null">
                                     {{info.past_match}}
                                 </td>
-                                <td>
+                                <td ng-if="info.past_match==null">
+                                    missed
+                                </td>
+                                <td ng-if="info.next_match!=null">
                                     {{info.next_match}}
+                                </td>
+                                <td ng-if="info.next_match==null">
+                                    &nbsp;
                                 </td>
                                 <td>
                                     {{info.user_score}}

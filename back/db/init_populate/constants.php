@@ -35,6 +35,20 @@ class DB_Constants {
         return $datetime;
     }
 
+    public static function getTimeToday($input = "") {
+        if($input == "") {
+            $timezone = date_default_timezone_get();
+            //echo "default timezone = $timezone\n";
+            date_default_timezone_set('America/Los_Angeles');
+            $datetime = date('Y-m-d',time());
+            date_default_timezone_set($timezone);
+            return $datetime;
+        }
+        $datetime = strtotime($input);
+        $datetime = date('Y-m-d',$datetime);
+        return $datetime;
+    }
+
     public static function sendAlertEmail($content) {
         $content = wordwrap($content, 70);
         mail(
