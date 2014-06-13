@@ -3,7 +3,7 @@
  */
 
 
-var isLocal = true;
+var isLocal = false;
 
 var urlPrefix = "http://peirongli.dreamhosters.com/";
 

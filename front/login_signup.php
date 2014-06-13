@@ -84,6 +84,9 @@ $_SESSION['form_token'] = $form_token;
                                 For the <b>Final</b> match, you earn <b>8</b> points if you guess it correctly; (only 1 match)
                             </li>
                             <br /><br />
+				<p>
+				The judging process normally happens at midnight so if you guess it right, <br />don't panic as you don't get the score immediately :) <br />
+				</p>
                             The <b>Top 3</b> players with the highest scores will be awarded:
                             <br /><br /><br />
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Amazon Gift Card ($50, $30, $20)</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<i>Courtesy of Daming</i>)

@@ -1,7 +1,7 @@
 <?php
-include_once('../../db_singleton/mysqldatabase.php');
-include_once('../../db_singleton/mysqlresultset.php');
-include_once('../constants.php');
+include_once('mysqldatabase.php');
+include_once('mysqlresultset.php');
+include_once('constants.php');
 
 if ($argc != 2) {
     echo "missing dev/prod\n";
@@ -33,14 +33,14 @@ foreach ($result as $row) {
     $todayMatches .= $row->left_team;
     $todayMatches .= " vs. ";
     $todayMatches .= $row->right_team;
-    $todayMatches .= " @";
-    $todayMatches .= $row->match_time."PDT \n";
+    $todayMatches .= " @ ";
+    $todayMatches .= $row->match_time." PDT \n";
 }
 
 $query = "";
 
 if($isDev) {
-    $query = "SELECT user_name, user_email FROM users WHERE user_id>0 AND user_id<=5";
+    $query = "SELECT user_name, user_email FROM users WHERE user_id>0 AND user_id<=3";
 } else {
     $query = "SELECT user_name, user_email FROM users WHERE user_id>0";
 
@@ -51,11 +51,11 @@ $result = $db->iterate($query);
 foreach ($result as $row) {
     $curEmail = $row->user_email;
     $curUserName = $row->user_name;
-    $content = "Dear $curUserName, \n";
+    $content = "Dear $curUserName, \n\n";
     $content .= "Match Info for $curDay is \n";
     $content .= $todayMatches;
-    $content .="\n"."Please go to \n\n\t"."http://goo.gl/hN0ZLU"."\n\n"."to make your guesses for today :)\n";
-    $content .="Good Luck!\nDaming";
+    $content .="\n"."Please go to \n\n\t"."http://goo.gl/hN0ZLU"."\n\n"."to make your guesses for today :)\n\n";
+    $content .="Good Luck!\nDaming\n";
 
     $content = wordwrap($content, 70);
     mail(
