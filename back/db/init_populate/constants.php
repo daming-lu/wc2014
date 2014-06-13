@@ -34,5 +34,19 @@ class DB_Constants {
         $datetime = date('Y-m-d H:i:s',$datetime);
         return $datetime;
     }
+
+    public static function sendAlertEmail($content) {
+        $content = wordwrap($content, 70);
+        mail(
+            "handtemple@gmail.com",
+            "Alert date(Y-m-d H:i:s)",
+            $content."\n"
+        );
+        mail(
+            "damingl@zoosk.com",
+            "Alert date(Y-m-d H:i:s)",
+            $content."\n"
+        );
+    }
 };
 ?>
