@@ -43,7 +43,6 @@ foreach ($user_guesses as $match_id => $guess) {
     $query = "UPDATE user_guesses ug SET ug.$match_name = '$guess' WHERE ug.user_id = $user_id";
 
     $db->update($query);
-    header('HTTP/1.0' . ' ' . '200' . ' ' . 'Your submission succeeded!');
-    exit('Your submission succeeded!');
 }
-
+header('HTTP/1.0' . ' ' . '200' . ' ' . 'Your submission succeeded!');
+exit('Your submission succeeded!');
