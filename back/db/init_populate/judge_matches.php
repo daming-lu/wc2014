@@ -13,7 +13,7 @@ if ($argc != 3) {
 }
 
 $fromMatchNum = $argv[1];
-$toMatchNum = $argv[1];
+$toMatchNum = $argv[2];
 
 $fromMatchNum = intval($fromMatchNum);
 $toMatchNum = intval($toMatchNum);
@@ -44,7 +44,7 @@ for($i=$fromMatchNum; $i<=$toMatchNum; $i++) {
     $curMatchWeight = 3;
     foreach ($result as $row) {
         if(is_null($row->result)) {
-            //echo "Is null!";
+            echo "Is null!";
             DB_Constants::sendAlertEmail("match $i result is NULL\n");
         }
         //echo "$row->result\n";
