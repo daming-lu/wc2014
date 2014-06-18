@@ -45,7 +45,7 @@ function getUpcomingMatches($db, $time="") {
         $curTime = DB_Constants::getTime();
         $curDay = DB_Constants::getTimeToday();
     }
-    $query = "SELECT match_id, left_team, right_team, match_time FROM matches WHERE match_time BETWEEN '$curTime' AND DATE_ADD('$curDay',INTERVAL + 1 DAY)";
+    $query = "SELECT match_id, left_team, right_team, match_time FROM matches WHERE match_time BETWEEN '$curTime' AND DATE_ADD('$curDay',INTERVAL + 2 DAY)";
 
     foreach ($db->iterate($query) as $row) {
         $result []= array(
