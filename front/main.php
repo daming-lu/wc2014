@@ -86,7 +86,7 @@ if (!isset($_SESSION['CREATED'])) {
              <!-- Left Column -->
            	 <div class="col-md-7">
                 <div class="panel panel-default">
-                  <div class="panel-heading"><a href="#" class="pull-right"></a> <h4>Current Ranking</h4></div>
+                  <div class="panel-heading"><button class="btn btn-success pull-right" type="button" ng-click="goToRanking()">View All</button> <h4>Current Ranking</h4></div>
                     <div class="panel-body">
 
                         <table class="table table-bordered">
@@ -154,7 +154,7 @@ if (!isset($_SESSION['CREATED'])) {
                             </tr>
                             </tbody>
                         </table>
-                        <button class="my-submit-button" ng-click="submitGuess(guess)">Submit</button>
+                        <button class="btn btn-success pull-right" type="button" ng-click="submitGuess(guess)">Submit</button>
                             {{submitStatus}}
                         </form>
 

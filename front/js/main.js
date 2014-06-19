@@ -65,4 +65,9 @@ mainApp.controller('mainCtrl', ['$scope', '$http',function($scope, $http, $locat
               }
         );
     }
+
+    $scope.goToRanking = function() {
+        window.location.href = urlPrefix + "wc2014/front/detailedRanking_Front.php";
+
+    }
 }]);

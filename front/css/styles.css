@@ -48,11 +48,7 @@ footer > .container {
   padding: 20px;
 }
 
-body {
-  padding-top: 51px; 
-  background: #1E1E1E;
-  color: #f9f9f9;
-}
+
 a {
   color:#bcbcbc;
 }
@@ -192,3 +188,7 @@ h3,h4,h5,.panel {
 }
 
 
+.centered
+{
+    text-align:center;
+}

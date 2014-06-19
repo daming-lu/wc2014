@@ -1,0 +1,8 @@
+.x_scroll {
+    overflow-x: scroll;
+    overflow-y: scroll;
+}
+
+.table_center {
+    text-align: center;
+}
