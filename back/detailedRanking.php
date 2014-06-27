@@ -21,7 +21,7 @@ $allUserGuesses     = array();
 $maxMatchID = 56; // all the group matches
 
 // get all the match info
-$query = "SELECT match_id, left_team, right_team, match_time, result FROM matches WHERE match_id >= 48 AND match_id <= $maxMatchID ";
+$query = "SELECT match_id, left_team, right_team, match_time, result FROM matches WHERE match_id >= 49 AND match_id <= $maxMatchID ";
 
 foreach ($db->iterate($query) as $row) {
     $allGroupMatches []= array(
@@ -40,7 +40,7 @@ foreach ($db->iterate($query) as $row) {
     $cur_user_guesses = array();
     $cur_user_guesses['user_name'] = $row->user_name;
     $cur_user_guesses['user_score'] = $row->user_score;
-    $match_id = 1;
+    $match_id = 49;
     while ($match_id <= $maxMatchID) {
         $cur_match_id = "match_".strval($match_id);
         $cur_match_isCorrect = "match_".strval($match_id)."_is_correct";
