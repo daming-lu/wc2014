@@ -18,10 +18,10 @@ header('HTTP/1.0' . ' ' . '200' . ' ' . 'OK');
 $allGroupMatches    = array();
 $allUserGuesses     = array();
 
-$maxMatchID = 48; // all the group matches
+$maxMatchID = 56; // all the group matches
 
 // get all the match info
-$query = "SELECT match_id, left_team, right_team, match_time, result FROM matches WHERE match_id >= 1 AND match_id <= $maxMatchID ";
+$query = "SELECT match_id, left_team, right_team, match_time, result FROM matches WHERE match_id >= 48 AND match_id <= $maxMatchID ";
 
 foreach ($db->iterate($query) as $row) {
     $allGroupMatches []= array(
