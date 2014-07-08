@@ -70,6 +70,7 @@ mainApp.controller('mainCtrl', ['$scope', '$http',function($scope, $http, $locat
     };
 
     $scope.submitFinalFourGuess = function(inputGuess) {
+        /*
         var today = new Date();
         var url = urlPrefix + "wc2014/back/submitFinalFourGuess.php";
         var params = {
@@ -92,6 +93,7 @@ mainApp.controller('mainCtrl', ['$scope', '$http',function($scope, $http, $locat
                 $scope.ffSubmitStatus = "Your final-four submission failed. Please check your format";
               }
         );
+        */
     };
 
     $scope.goToRanking = function() {
