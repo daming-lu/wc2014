@@ -234,59 +234,6 @@ if (!isset($_SESSION['CREATED'])) {
                  </div>
                 <!-- Final Four Display << -->
 
-                <!-- Final Four Submit>>> -->
-                <div class="panel panel-default">
-                   <div class="panel-heading"> <h4>Please Guess the Order of Final Four</h4>
-                       <br />
-                       <br />
-                   </div>
-                    <div class="panel-body">
-                        <form class="form-horizontal" role="form">
-                        <table class="table table-bordered">
-                            <tbody ng-model="final_four">
-                            <tr>
-                                <td>
-                                    Brazil
-                                </td>
-                                <td>
-                                    <select class="form-control" ng-model="final_four.Brazil" ng-options="elem.value as elem.label for elem in rankFour">
-                                        <option value=""></option>
-                                    </select>
-                                </td>
-                                <td>
-                                    Germany
-                                </td>
-                                <td>
-                                    <select class="form-control" ng-model="final_four.Germany" ng-options="elem.value as elem.label for elem in rankFour">
-                                        <option value=""></option>
-                                    </select>
-                                </td>
-                                <td>
-                                    Netherlands
-                                </td>
-                                <td>
-                                    <select class="form-control" ng-model="final_four.Netherlands" ng-options="elem.value as elem.label for elem in rankFour">
-                                        <option value=""></option>
-                                    </select>
-                                </td>
-                                <td>
-                                    Argentina
-                                </td>
-                                <td>
-                                    <select class="form-control" ng-model="final_four.Argentina" ng-options="elem.value as elem.label for elem in rankFour">
-                                        <option value=""></option>
-                                    </select>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <button class="btn btn-success pull-right" type="button" ng-click="submitFinalFourGuess(final_four)">Submit</button>
-                            {{ffSubmitStatus}}
-                        </form>
-
-                    </div><!--/panel-body-->
-                 </div>
-                <!-- Final Four <<< -->
 
 
 
