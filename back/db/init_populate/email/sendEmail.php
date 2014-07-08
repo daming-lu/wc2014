@@ -27,7 +27,7 @@ $todayMatches = "\n";
 $curTime = DB_Constants::getTime();
 $curDay = DB_Constants::getTimeToday();
 
-$query = "SELECT match_id, left_team, right_team, match_time FROM matches WHERE match_time BETWEEN '$curTime' AND DATE_ADD('$curDay',INTERVAL + 1 DAY)";
+$query = "SELECT match_id, left_team, right_team, match_time FROM matches WHERE match_time BETWEEN '$curTime' AND DATE_ADD('$curDay',INTERVAL + 3 DAY)";
 $result = $db->iterate($query);
 foreach ($result as $row) {
     $todayMatches .= $row->left_team;
@@ -52,7 +52,7 @@ foreach ($result as $row) {
     $curEmail = $row->user_email;
     $curUserName = $row->user_name;
     $content = "Dear $curUserName, \n\n";
-    $content .= "Match Info for $curDay is \n";
+    $content .= "Upcoming matches for $curDay and the next 2 days are \n";
     $content .= $todayMatches;
     $content .="\n"."Please go to \n\n\t"."http://goo.gl/hN0ZLU"."\n\n"."to make your guesses for today :)\n\n";
     $content .="Good Luck!\nDaming\n";

@@ -133,7 +133,7 @@ if (!isset($_SESSION['CREATED'])) {
             <div class="col-md-5">
 
                  <div class="panel panel-default">
-                   <div class="panel-heading"> <h4>Upcoming Matches for Next 2 Days</h4>
+                   <div class="panel-heading"> <h4>Upcoming Matches for Next 3 Days</h4>
                        <br />
                        Please fill in all your guesses and click submit
                    </div>

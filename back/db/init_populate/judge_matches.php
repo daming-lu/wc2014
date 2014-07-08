@@ -41,7 +41,7 @@ for($i=$fromMatchNum; $i<=$toMatchNum; $i++) {
         DB_Constants::sendAlertEmail("match $i is not unique\n");
     }
     $curMatchResult = "";
-    $curMatchWeight = 3;
+    $curMatchWeight = 4;
     foreach ($result as $row) {
         if(is_null($row->result)) {
             echo "Is null!";
