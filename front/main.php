@@ -132,6 +132,35 @@ if (!isset($_SESSION['CREATED'])) {
             <!-- Right Column -->
             <div class="col-md-5">
 
+                <!-- >>> -->
+                <div class="panel panel-default">
+                  <div class="panel-heading"> <h4>Your Current Guesses</h4>
+                      <br />
+                      Below shows your current guesses
+                  </div>
+                   <div class="panel-body">
+                       <form class="form-horizontal" role="form">
+                       <table class="table table-bordered">
+                           <tbody ng-model="guess" ng-repeat="(i, info) in upcomingMatches">
+                           <tr>
+                               <td>
+                                   {{info.match_id}}
+                               </td>
+                               <td>
+                                   {{info.left_team}} vs. {{info.right_team}}
+                               </td>
+                               <td>
+                                   <input class="guess-score" ng-model="guess[info.match_id]" id="{{info.match_id}}"  placeholder="{{info.user_guess_left}}:{{info.user_guess_right}}" required="" type="text" maxlength="3" disabled/>
+                               </td>
+                           </tr>
+                           </tbody>
+                       </table>
+                       </form>
+
+                   </div><!--/panel-body-->
+                </div><!--/panel-->
+                <!-- <<< -->
+
                  <div class="panel panel-default">
                    <div class="panel-heading"> <h4>Upcoming Matches for Next 3 Days</h4>
                        <br />

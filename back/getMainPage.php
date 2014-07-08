@@ -21,7 +21,10 @@ catch (Exception $e) {
 // get the left ranking
 $conciseRanking = getConciseRanking($db);
 
-$upcomingMatches = getUpcomingMatches($db);
+$upcomingMatches = getUpcomingMatches($db, $user_id);
+
+//$userCurrentGuesses = $upcomingMatches['userCurrentGuesses'];
+//unset($upcomingMatches['userCurrentGuesses']);
 
 header('HTTP/1.0' . ' ' . '200' . ' ' . 'OK');
 
@@ -32,12 +35,13 @@ $responseToMainPage = array (
 
 $encoded = json_encode($responseToMainPage);
 
-
-
 exit($encoded);
 //------------------------------------------------------------------------------------------------
-function getUpcomingMatches($db, $time="") {
+function getUpcomingMatches($db, $user_id, $time="") {
     $result = array();
+
+    $userCurrentGuesses = array();
+    $match_ids = array();
 
     $curTime = $time;
     if($time=="") {
@@ -48,14 +52,36 @@ function getUpcomingMatches($db, $time="") {
     $query = "SELECT match_id, left_team, right_team, match_time FROM matches WHERE match_time BETWEEN '$curTime' AND DATE_ADD('$curDay',INTERVAL + 3 DAY)";
 
     foreach ($db->iterate($query) as $row) {
+
+        $user_guess_left = "";
+        $user_guess_right = "";
+        $match_id_str = "match_".strval($row->match_id);
+
+
+        $guess_query = "SELECT $match_id_str FROM user_guesses WHERE user_id = $user_id";
+
+        foreach ($db->iterate($guess_query) as $guess_row) {
+
+            $user_guess = $guess_row->$match_id_str;
+            if (!is_null($user_guess)) {
+                $pieces = explode(":", $user_guess);
+                $user_guess_left = $pieces[0];
+                $user_guess_right = $pieces[1];
+            }
+            break;
+        }
+
         $result []= array(
-            'match_id'      => $row->match_id,
-            'left_team'     => $row->left_team,
-            'right_team'    => $row->right_team,
-            'match_time'    => $row->match_time
+            'match_id'          => $row->match_id,
+            'left_team'         => $row->left_team,
+            'right_team'        => $row->right_team,
+            'match_time'        => $row->match_time,
+            'user_guess_left'   => $user_guess_left,
+            'user_guess_right'  => $user_guess_right
         );
         //break;
     }
+
     return $result;
 }
 
