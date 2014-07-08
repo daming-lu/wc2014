@@ -189,17 +189,107 @@ if (!isset($_SESSION['CREATED'])) {
 
                     </div><!--/panel-body-->
                  </div><!--/panel-->
-                <div class="well">
-                     <form class="form-horizontal" role="form">
-                      <h4>Comments</h4>
-                         <i>Still under development :'(</i>
-                       <div class="form-group" style="padding:14px;">
-                        <textarea class="form-control" placeholder="Write your comments here"></textarea>
-                      </div>
-                      <button class="btn btn-success" type="button">Post</button>
 
-                    </form>
-                </div><!--/well-->
+                <!-- Final Four Display >> -->
+                <div class="panel panel-default">
+                   <div class="panel-heading"> <h4>Your Guess of the Final Four Ranking</h4>
+                       <br />
+                       <br />
+                   </div>
+                    <div class="panel-body">
+                        <form class="form-horizontal" role="form">
+                        <table class="table table-bordered">
+                            <tbody ng-model="final_four">
+                            <tr>
+                                <td>
+                                    Brazil
+                                </td>
+                                <td>
+                                    {{final_four.Brazil}}
+                                </td>
+                                <td>
+                                    Germany
+                                </td>
+                                <td>
+                                    {{final_four.Germany}}
+                                </td>
+                                <td>
+                                    Netherlands
+                                </td>
+                                <td>
+                                    {{final_four.Netherlands}}
+                                </td>
+                                <td>
+                                    Argentina
+                                </td>
+                                <td>
+                                    {{final_four.Argentina}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        </form>
+
+                    </div><!--/panel-body-->
+                 </div>
+                <!-- Final Four Display << -->
+
+                <!-- Final Four Submit>>> -->
+                <div class="panel panel-default">
+                   <div class="panel-heading"> <h4>Please Guess the Order of Final Four</h4>
+                       <br />
+                       <br />
+                   </div>
+                    <div class="panel-body">
+                        <form class="form-horizontal" role="form">
+                        <table class="table table-bordered">
+                            <tbody ng-model="final_four">
+                            <tr>
+                                <td>
+                                    Brazil
+                                </td>
+                                <td>
+                                    <select class="form-control" ng-model="final_four.Brazil" ng-options="elem.value as elem.label for elem in rankFour">
+                                        <option value=""></option>
+                                    </select>
+                                </td>
+                                <td>
+                                    Germany
+                                </td>
+                                <td>
+                                    <select class="form-control" ng-model="final_four.Germany" ng-options="elem.value as elem.label for elem in rankFour">
+                                        <option value=""></option>
+                                    </select>
+                                </td>
+                                <td>
+                                    Netherlands
+                                </td>
+                                <td>
+                                    <select class="form-control" ng-model="final_four.Netherlands" ng-options="elem.value as elem.label for elem in rankFour">
+                                        <option value=""></option>
+                                    </select>
+                                </td>
+                                <td>
+                                    Argentina
+                                </td>
+                                <td>
+                                    <select class="form-control" ng-model="final_four.Argentina" ng-options="elem.value as elem.label for elem in rankFour">
+                                        <option value=""></option>
+                                    </select>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <button class="btn btn-success pull-right" type="button" ng-click="submitFinalFourGuess(final_four)">Submit</button>
+                            {{ffSubmitStatus}}
+                        </form>
+
+                    </div><!--/panel-body-->
+                 </div>
+                <!-- Final Four <<< -->
+
+
+
               </div><!--/col-->
           </div><!--/row-->
       </div><!--/.row-->

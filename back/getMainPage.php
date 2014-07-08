@@ -23,6 +23,7 @@ $conciseRanking = getConciseRanking($db);
 
 $upcomingMatches = getUpcomingMatches($db, $user_id);
 
+$ff_guesses = getFFGuesses($db, $user_id);
 //$userCurrentGuesses = $upcomingMatches['userCurrentGuesses'];
 //unset($upcomingMatches['userCurrentGuesses']);
 
@@ -30,7 +31,8 @@ header('HTTP/1.0' . ' ' . '200' . ' ' . 'OK');
 
 $responseToMainPage = array (
     'conciseRanking'    => $conciseRanking,
-    'upcomingMatches'   => $upcomingMatches
+    'upcomingMatches'   => $upcomingMatches,
+    'ff_guesses'        => $ff_guesses
 );
 
 $encoded = json_encode($responseToMainPage);
@@ -83,6 +85,38 @@ function getUpcomingMatches($db, $user_id, $time="") {
     }
 
     return $result;
+}
+
+//------------------------------------------------------------------------------------------------
+function getFFGuesses($db, $user_id) {
+
+    $Brazil = "";
+    $Germany = "";
+    $Netherlands = "";
+    $Argentina = "";
+
+    $ff_query = "SELECT Brazil, Germany, Netherlands, Argentina FROM user_final_four WHERE user_id = $user_id";
+
+    $ff_result = $db->iterate($ff_query);
+
+    if ($ff_result->getNumRows()==1) {
+        foreach ($db->iterate($ff_query) as $ff_row) {
+            $Brazil         = $ff_row->Brazil;
+            $Germany        = $ff_row->Germany;
+            $Netherlands    = $ff_row->Netherlands;
+            $Argentina      = $ff_row->Argentina;
+            break;
+        }
+    }
+
+    $ff_guesses = array(
+        'Brazil'            => $Brazil,
+        'Germany'           => $Germany,
+        'Netherlands'       => $Netherlands,
+        'Argentina'         => $Argentina
+    );
+
+    return $ff_guesses;
 }
 
 //------------------------------------------------------------------------------------------------
