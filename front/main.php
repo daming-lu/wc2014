@@ -86,7 +86,9 @@ if (!isset($_SESSION['CREATED'])) {
              <!-- Left Column -->
            	 <div class="col-md-7">
                 <div class="panel panel-default">
-                  <div class="panel-heading"><button class="btn btn-success pull-right" type="button" ng-click="goToRanking()">View All</button> <h4>Current Ranking</h4></div>
+                  <div class="panel-heading">
+                      <button class="btn btn-success pull-right" type="button" ng-click="goToRanking()">View All</button> <h4>Current Ranking</h4>
+                  </div>
                     <div class="panel-body">
 
                         <table class="table table-bordered">
@@ -192,8 +194,8 @@ if (!isset($_SESSION['CREATED'])) {
 
                 <!-- Final Four Display >> -->
                 <div class="panel panel-default">
-                   <div class="panel-heading"> <h4>Your Guess of the Final Four Ranking</h4>
-                       <br />
+                   <div class="panel-heading"> <button class="btn btn-success pull-right" type="button" ng-click="goToFinalFour()">View All</button><h4>Your Guess of the Final Four Ranking</h4>
+
                        <br />
                    </div>
                     <div class="panel-body">

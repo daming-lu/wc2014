@@ -101,6 +101,11 @@ mainApp.controller('mainCtrl', ['$scope', '$http',function($scope, $http, $locat
 
     };
 
+    $scope.goToFinalFour = function() {
+        window.location.href = urlPrefix + "wc2014/front/finalFour_Front.php";
+
+    };
+
     $scope.rankFour = [
         {'value': 1,  'label': '1st'},
         {'value': 2,  'label': '2nd'},
